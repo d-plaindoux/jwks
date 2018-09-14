@@ -1,5 +1,33 @@
+/**
+   Source: https://tools.ietf.org/html/rfc7517
+
+   The "kty" (key type) parameter identifies the cryptographic algorithm
+   family used with the key, such as "RSA" or "EC".  "kty" values should
+   either be registered in the IANA "JSON Web Key Types" registry
+   established by [JWA] or be a value that contains a Collision-
+   Resistant Name.  The "kty" value is a case-sensitive string.  This
+   member MUST be present in a JWK.
+
+   Source: https://tools.ietf.org/html/rfc7518
+
+   The table below is the set of "kty" (key type) parameter values that
+   are defined by this specification for use in JWKs.
+
+   +-------------+--------------------------------+--------------------+
+   | "kty" Param | Key Type                       | Implementation     |
+   | Value       |                                | Requirements       |
+   +-------------+--------------------------------+--------------------+
+   | EC          | Elliptic Curve [DSS]           | Recommended+       |
+   | RSA         | RSA [RFC3447]                  | Required           |
+   | oct         | Octet sequence (used to        | Required           |
+   |             | represent symmetric keys)      |                    |
+   +-------------+--------------------------------+--------------------+
+*/
+
 pub enum KeyType {
-    TODO
+    EC,
+    RSA,
+    OCTET
 }
 
 /**
@@ -65,6 +93,15 @@ pub enum KeyOperation {
 }
 
 /**
+   Source: https://tools.ietf.org/html/rfc7517
+
+   The "alg" (algorithm) parameter identifies the algorithm intended for
+   use with the key.  The values used should either be registered in the
+   IANA "JSON Web Signature and Encryption Algorithms" registry
+   established by [JWA] or be a value that contains a Collision-
+   Resistant Name.  The "alg" value is a case-sensitive ASCII string.
+   Use of this member is OPTIONAL.
+
    Source: https://tools.ietf.org/html/rfc7518
 
    The table below is the set of "alg" (algorithm) Header Parameter
