@@ -2,11 +2,11 @@
 
 A [Rust](https://www.rust-lang.org/en-US/) library for JWT and JWKS support
 
-# JSon Web Token
+# JSON Web Token
 
 TODO
 
-# JSOn Wek Key
+# JSON Web Key
 
 TODO
 
