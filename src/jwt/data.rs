@@ -11,7 +11,7 @@
    representation to be compact.
 */
 
-pub struct JsonWebToken {
+pub struct JSONWebToken {
     pub issuer: String,                                         // iss
     pub subject: String,                                        // sub
     pub audience: Vec<String>,                                  // aud

@@ -1,4 +1,23 @@
 /**
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+
+/**
    Source: https://tools.ietf.org/html/rfc7517
 
    The "kty" (key type) parameter identifies the cryptographic algorithm
@@ -150,6 +169,8 @@ pub enum Algorithm {
 }
 
 /**
+   Source: https://tools.ietf.org/html/rfc7517
+
    A JSON Web Key (JWK) is a JavaScript Object Notation (JSON) data
    structure that represents a cryptographic key.  This specification
    also defines a JWK Set JSON data structure that represents a set of
@@ -158,14 +179,42 @@ pub enum Algorithm {
    specification and IANA registries established by that specification.
 */
 
-pub struct JsonWebKey {
+pub struct JSONWebKey<E> {
     pub key_type : KeyType,                                     // kty
     pub key_use : Option<KeyUse>,                               // use
     pub key_operation : Option<KeyOperation>,                   // key_ops
     pub key_id : Option<String>,                                // kid
     pub x509_url: String,                                       // x5u
-    pub x509_chain: String,                                     // x5c
+    pub x509_chain: Vec<String>,                                // x5c
     pub x509_s1_thumb_print: String,                            // x5t SHA-1
-    pub x509_s256_thumb_print: String                           // x5t SHA-256
+    pub x509_s256_thumb_print: String,                          // x5t SHA-256
+    pub key_specification: E                                    // key specific definition
 }
 
+/**
+    Additional element used for key externalisation purpose.
+*/
+
+pub struct RSAPublicSpecification {
+    pub modulus: String,
+    pub exponent: String
+}
+
+pub struct RSAPrivateSpecification {
+    pub modulus: String,
+    pub public_exponent: Option<String>,
+    pub private_exponent: String
+}
+
+pub struct ECPublicSpecification {
+    pub x: String,
+    pub y: String,
+    pub curve: String
+}
+
+pub struct ECPrivateSpecification {
+    pub x: String,
+    pub y: String,
+    pub curve: String,
+    pub private_exponent: String
+}
