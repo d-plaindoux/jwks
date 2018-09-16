@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 pub trait Capability {}
 
 // -------------------------------------------------------------------------------------------------
@@ -13,6 +15,6 @@ impl Capability for Encryption {}
 // -------------------------------------------------------------------------------------------------
 
 pub struct Signature<E> where E: Capability {
-    pub key: E
+    pub capability: PhantomData<E>
 }
 

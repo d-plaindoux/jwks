@@ -15,9 +15,9 @@ pub struct JSONWebToken {
     pub issuer: String,                                         // iss
     pub subject: String,                                        // sub
     pub audience: Vec<String>,                                  // aud
-    pub expiration_time: String,                                // exp
-    pub not_before: String,                                     // nbf
-    pub issued_at: String,                                      // iat
+    pub expiration_time: f64,                                   // exp
+    pub not_before: f64,                                        // nbf
+    pub issued_at: f64,                                         // iat
     pub identifier: String                                      // jti
 }
 

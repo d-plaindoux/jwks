@@ -1,6 +1,9 @@
-# jwtks
+# jwtks 
+
 
 A [Rust](https://www.rust-lang.org/en-US/) library for JWT and JWKS support
+
+Pronunciation: /dʒɒtkeɪs/
 
 # JSON Web Token
 

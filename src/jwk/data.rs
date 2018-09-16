@@ -181,7 +181,7 @@ pub enum Algorithm {
 
 pub trait KeySpecification {}
 
-pub struct JSONWebKey<E> where E:KeySpecification {
+pub struct JSONWebKey<E> where E: KeySpecification {
     pub key_type : KeyType,                                     // kty
     pub key_use : Option<KeyUse>,                               // use
     pub key_operation : Option<KeyOperation>,                   // key_ops
