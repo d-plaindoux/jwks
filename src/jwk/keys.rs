@@ -1,18 +1,17 @@
 use jwk::data::*;
 use jwk::signature::*;
-use std::error::Error;
 
 
 /// KeyProvider is the main trait able to provide the key corresponding to a given specification
 
-pub trait KeyProvider<E> {
-    fn key(&self) -> Result<Signature<E>, Error>;
+pub trait KeyProvider<E> where E: Capability {
+    fn key(&self) -> Option<Signature<E>>;
 }
 
 // -------------------------------------------------------------------------------------------------
 
 impl KeyProvider<Verification> for JSONWebKey<RSAPublicSpecification> {
-    fn key(&self) -> Result<Signature<Verification>, Error> {
+    fn key(&self) -> Option<Signature<Verification>> {
         unimplemented!()
     }
 }
@@ -20,7 +19,7 @@ impl KeyProvider<Verification> for JSONWebKey<RSAPublicSpecification> {
 // -------------------------------------------------------------------------------------------------
 
 impl KeyProvider<Verification> for JSONWebKey<ECPublicSpecification> {
-    fn key(&self) -> Result<Signature<Verification>, Error> {
+    fn key(&self) -> Option<Signature<Verification>> {
         unimplemented!()
     }
 }
@@ -28,7 +27,7 @@ impl KeyProvider<Verification> for JSONWebKey<ECPublicSpecification> {
 // -------------------------------------------------------------------------------------------------
 
 impl KeyProvider<Encryption> for JSONWebKey<RSAPrivateSpecification> {
-    fn key(&self) -> Result<Signature<Encryption>, Error> {
+    fn key(&self) -> Option<Signature<Encryption>> {
         unimplemented!()
     }
 }
@@ -36,7 +35,7 @@ impl KeyProvider<Encryption> for JSONWebKey<RSAPrivateSpecification> {
 // -------------------------------------------------------------------------------------------------
 
 impl KeyProvider<Encryption> for JSONWebKey<ECPrivateSpecification> {
-    fn key(&self) -> Result<Signature<Encryption>, Error> {
+    fn key(&self) -> Option<Signature<Encryption>> {
         unimplemented!()
     }
 }

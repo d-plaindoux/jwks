@@ -179,7 +179,9 @@ pub enum Algorithm {
    specification and IANA registries established by that specification.
 */
 
-pub struct JSONWebKey<E> {
+pub trait KeySpecification {}
+
+pub struct JSONWebKey<E> where E:KeySpecification {
     pub key_type : KeyType,                                     // kty
     pub key_use : Option<KeyUse>,                               // use
     pub key_operation : Option<KeyOperation>,                   // key_ops
@@ -199,18 +201,27 @@ pub struct RSAPublicSpecification {
     pub modulus: String,
     pub exponent: String
 }
+impl KeySpecification for RSAPublicSpecification {}
+
+// -------------------------------------------------------------------------------------------------
 
 pub struct RSAPrivateSpecification {
     pub modulus: String,
     pub public_exponent: Option<String>,
     pub private_exponent: String
 }
+impl KeySpecification for RSAPrivateSpecification {}
+
+// -------------------------------------------------------------------------------------------------
 
 pub struct ECPublicSpecification {
     pub x: String,
     pub y: String,
     pub curve: String
 }
+impl KeySpecification for ECPublicSpecification {}
+
+// -------------------------------------------------------------------------------------------------
 
 pub struct ECPrivateSpecification {
     pub x: String,
@@ -218,3 +229,6 @@ pub struct ECPrivateSpecification {
     pub curve: String,
     pub private_exponent: String
 }
+impl KeySpecification for ECPrivateSpecification {}
+
+// -------------------------------------------------------------------------------------------------

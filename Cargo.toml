@@ -5,3 +5,4 @@ authors = ["Didier Plaindoux <d.plaindoux@free.fr>"]
 
 [dependencies]
 openssl = { version = "0.10", features = ["vendored"] }
+serde_json = "1.0"
