@@ -11,13 +11,14 @@
    representation to be compact.
 */
 
+#[derive(Debug)]
 pub struct JSONWebToken {
-    pub issuer: String,                                         // iss
-    pub subject: String,                                        // sub
-    pub audience: Vec<String>,                                  // aud
-    pub expiration_time: f64,                                   // exp
-    pub not_before: f64,                                        // nbf
-    pub issued_at: f64,                                         // iat
-    pub identifier: String                                      // jti
+    pub issuer: Option<String>,                                 // iss
+    pub subject: Option<String>,                                // sub
+    pub audience: Option<Vec<String>>,                          // aud
+    pub expiration_time: Option<f64>,                           // exp
+    pub not_before: Option<f64>,                                // nbf
+    pub issued_at: Option<f64>,                                 // iat
+    pub identifier: Option<String>                              // jti
 }
 
