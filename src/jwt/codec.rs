@@ -5,38 +5,73 @@ use jwt::data::JSONWebToken;
 
 #[derive(Serialize, Deserialize)]
 pub struct JSONWebToken4Codec {
+    #[serde(rename = "iss")]
     #[serde(default)]
-    pub iss: Option<String>,
+    pub issuer: Option<String>,
+
+    #[serde(rename = "sub")]
     #[serde(default)]
-    pub sub: Option<String>,
+    pub subject: Option<String>,
+
+    #[serde(rename = "aud")]
     #[serde(default)]
-    pub aud: Option<Vec<String>>,
+    pub audience: Option<Vec<String>>,
+
+    #[serde(rename = "exp")]
     #[serde(default)]
-    pub exp: Option<f64>,
+    pub expiration_time: Option<f64>,
+
+    #[serde(rename = "nbf")]
     #[serde(default)]
-    pub nbf: Option<f64>,
+    pub not_before: Option<f64>,
+
+    #[serde(rename = "iat")]
     #[serde(default)]
-    pub iat: Option<f64>,
+    pub issued_at: Option<f64>,
+
+    #[serde(rename = "jit")]
     #[serde(default)]
-    pub jit: Option<String>,
+    pub identifier: Option<String>,
 }
 
-impl Codec<JSONWebToken> for JSONWebToken4Codec {
-    fn encode(&self) -> &str {
-        unimplemented!()
+// -------------------------------------------------------------------------------------------------
+
+impl Codec<JSONWebToken4Codec> for JSONWebToken4Codec {
+    fn encode(&self) -> Option<String> {
+        serde_json::to_string(self).ok()
     }
 
-    fn decode(value: &str) -> Option<JSONWebToken> {
-        let result: Option<JSONWebToken4Codec> = serde_json::from_str(value).ok();
+    fn decode(value: & String) -> Option<JSONWebToken4Codec> {
+        serde_json::from_str(value.as_str()).ok()
+    }
+}
 
-        result.map(|v| JSONWebToken {
-            issuer: v.iss,
-            subject: v.sub,
-            audience: v.aud,
-            expiration_time: v.exp,
-            not_before: v.nbf,
-            issued_at: v.iat,
-            identifier: v.jit,
+// -------------------------------------------------------------------------------------------------
+
+impl Codec<JSONWebToken> for JSONWebToken {
+    fn encode(&self) -> Option<String> {
+        let copy = self.clone();
+
+        JSONWebToken4Codec {
+            issuer: copy.issuer,
+            subject: copy.subject,
+            audience: copy.audience,
+            expiration_time: copy.expiration_time,
+            not_before: copy.not_before,
+            issued_at: copy.issued_at,
+            identifier: copy.identifier,
+        }.encode()
+    }
+
+    fn decode(value: &String) -> Option<JSONWebToken> {
+        JSONWebToken4Codec::decode(value).map(|v| JSONWebToken {
+            issuer: v.issuer,
+            subject: v.subject,
+            audience: v.audience,
+            expiration_time: v.expiration_time,
+            not_before: v.not_before,
+            issued_at: v.issued_at,
+            identifier: v.identifier,
         })
     }
 }

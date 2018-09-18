@@ -11,7 +11,7 @@
    representation to be compact.
 */
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct JSONWebToken {
     pub issuer: Option<String>,                                 // iss
     pub subject: Option<String>,                                // sub

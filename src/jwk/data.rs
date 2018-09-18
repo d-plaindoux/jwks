@@ -46,7 +46,7 @@ under the License.
 pub enum KeyType {
     EC,
     RSA,
-    OCTET
+    OCTET,
 }
 
 /**
@@ -70,7 +70,7 @@ pub enum KeyType {
 pub enum KeyUse {
     Sig,
     Enc,
-    OtherKeyUse(String)
+    OtherKeyUse(String),
 }
 
 /**
@@ -108,7 +108,7 @@ pub enum KeyOperation {
     UnwrapKey,
     DeriveKeys,
     DeriveBytes,
-    OtherKeyOperation(String)
+    OtherKeyOperation(String),
 }
 
 /**
@@ -165,7 +165,7 @@ pub enum Algorithm {
     ES384,
     ES512,
     PS256,
-    PS512
+    PS512,
 }
 
 /**
@@ -181,54 +181,67 @@ pub enum Algorithm {
 
 pub trait KeySpecification {}
 
+pub trait KeySignature {}
+
+pub trait KeyEncryption {}
+
 pub struct JSONWebKey<E> where E: KeySpecification {
-    pub key_type : KeyType,                                     // kty
-    pub key_use : Option<KeyUse>,                               // use
-    pub key_operation : Option<KeyOperation>,                   // key_ops
-    pub key_id : Option<String>,                                // kid
-    pub x509_url: String,                                       // x5u
-    pub x509_chain: Vec<String>,                                // x5c
-    pub x509_s1_thumb_print: String,                            // x5t SHA-1
-    pub x509_s256_thumb_print: String,                          // x5t SHA-256
-    pub key_specification: E                                    // key specific definition
+    // kty
+    pub key_type: KeyType,
+    // use
+    pub key_use: Option<KeyUse>,
+    // key_ops
+    pub key_operation: Option<KeyOperation>,
+    // kid
+    pub key_id: Option<String>,
+    // alg
+    pub algorithm: Option<Algorithm>,
+    // x5u
+    pub x509_url: Option<String>,
+    // x5c
+    pub x509_chain: Option<Vec<String>>,
+    // x5t SHA-1
+    pub x509_s1_thumb_print: Option<String>,
+    // x5t SHA-256
+    pub x509_s256_thumb_print: Option<String>,
+    // key specific definition
+    pub key_specification: E,
 }
 
-/**
-    Additional element used for key externalisation purpose.
-*/
+///
+/// Additional element used for key externalisation purpose.
+///
 
-pub struct RSAPublicSpecification {
-    pub modulus: String,
-    pub exponent: String
+pub enum PublicSpecification {
+    RSA {
+        modulus: String,
+        exponent: String,
+    },
+    EC {
+        x: String,
+        y: String,
+        curve: String,
+    }
 }
-impl KeySpecification for RSAPublicSpecification {}
+
+impl KeySpecification for PublicSpecification {}
 
 // -------------------------------------------------------------------------------------------------
 
-pub struct RSAPrivateSpecification {
-    pub modulus: String,
-    pub public_exponent: Option<String>,
-    pub private_exponent: String
+pub enum PrivateSpecification {
+    RSA {
+        modulus: String,
+        public_exponent: Option<String>,
+        private_exponent: String,
+    },
+    EC {
+        x: String,
+        y: String,
+        curve: String,
+        private_exponent: String,
+    }
 }
-impl KeySpecification for RSAPrivateSpecification {}
 
-// -------------------------------------------------------------------------------------------------
-
-pub struct ECPublicSpecification {
-    pub x: String,
-    pub y: String,
-    pub curve: String
-}
-impl KeySpecification for ECPublicSpecification {}
-
-// -------------------------------------------------------------------------------------------------
-
-pub struct ECPrivateSpecification {
-    pub x: String,
-    pub y: String,
-    pub curve: String,
-    pub private_exponent: String
-}
-impl KeySpecification for ECPrivateSpecification {}
+impl KeySpecification for PrivateSpecification {}
 
 // -------------------------------------------------------------------------------------------------

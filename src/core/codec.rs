@@ -1,4 +1,6 @@
+/// TODO
+
 pub trait Codec<E> {
-    fn encode(&self) -> &str;
-    fn decode(value: &str) -> Option<E>;
+    fn encode(&self) -> Option<String>;
+    fn decode(value: &String) -> Option<E>;
 }
