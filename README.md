@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/d-plaindoux/jwtks.svg?branch=master)](https://travis-ci.org/d-plaindoux/jwtks)
 [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
 
-A [Rust](https://www.rust-lang.org/en-US/) library for JWT and JWKS support
+A [Rust](https://www.rust-lang.org/en-US/) library for [JWT](https://tools.ietf.org/html/rfc7519) and [JWKS](https://tools.ietf.org/html/rfc7517) support.
 
 # JSON Web Token
 
