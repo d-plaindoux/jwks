@@ -7,11 +7,11 @@ A [Rust](https://www.rust-lang.org/en-US/) library for [JWT](https://tools.ietf.
 
 # JSON Web Token
 
-TODO
+"JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties."
 
 # JSON Web Key
 
-TODO
+"A JSON Web Key (JWK) is a JavaScript Object Notation (JSON) data structure that represents a cryptographic key."
 
 # License
 
