@@ -1,3 +1,8 @@
-use jwt::data::JSONWebToken;
+use crate::jwk::data::JSONWebKey;
+use crate::jwk::data::PrivateSpecification;
+use crate::jwk::data::PublicSpecification;
 
-type JSONWebTokenSet<'a> = Vec<&'a JSONWebToken>;
+pub struct JSONWebKeySet<'a> {
+    pub key_signature: Vec<&'a JSONWebKey<PublicSpecification>>,
+    pub key_encryption: Vec<&'a JSONWebKey<PrivateSpecification>>,
+}

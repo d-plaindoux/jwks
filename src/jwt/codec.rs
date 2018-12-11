@@ -1,7 +1,7 @@
 extern crate serde_json;
 
-use core::codec::Codec;
-use jwt::data::JSONWebToken;
+use crate::core::codec::Codec;
+use crate::jwt::data::JSONWebToken;
 
 #[derive(Serialize, Deserialize)]
 pub struct JSONWebToken4Codec {

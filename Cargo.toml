@@ -2,6 +2,7 @@
 name = "jwtks"
 version = "0.1.0"
 authors = ["Didier Plaindoux <d.plaindoux@free.fr>"]
+edition = "2018"
 
 [dependencies]
 # If the vendored Cargo feature is enabled, the openssl-src crate will be

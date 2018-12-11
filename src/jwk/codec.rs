@@ -1,12 +1,12 @@
 extern crate serde_json;
 
-use core::codec::Codec;
-use jwk::data::Algorithm;
-use jwk::data::JSONWebKey;
-use jwk::data::KeyOperation;
-use jwk::data::KeyType;
-use jwk::data::KeyUse;
-use jwk::data::PublicSpecification;
+use crate::core::codec::Codec;
+use crate::jwk::data::Algorithm;
+use crate::jwk::data::JSONWebKey;
+use crate::jwk::data::KeyOperation;
+use crate::jwk::data::KeyType;
+use crate::jwk::data::KeyUse;
+use crate::jwk::data::PublicSpecification;
 use std::str::FromStr;
 
 #[derive(Serialize, Deserialize)]
